@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for room in classRooms %}
+        {% if room.availability == True %}
+            <h1>Classroom {{ room.roomNumber }} is available.</h1>
+        {% else %}
+            <h1>Classroom {{ room.roomNumber }} is not available.</h1>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

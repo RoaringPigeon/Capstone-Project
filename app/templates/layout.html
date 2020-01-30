@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if title %}
+        <title> Capstone-Project: {{title}}</title>
+    {% else %}
+        <title> Capstone-Project</title>
+    {% endif %}
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>
