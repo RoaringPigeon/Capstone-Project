@@ -19,6 +19,9 @@ classRooms = [
 @app.route("/home")
 def homePage():
     return render_template("home.html", title='Home', classRooms=classRooms)
-@app.route("/about")
-def aboutPage():
-    return render_template("about.html", title='About')
+@app.route("/login")
+def loginPage():
+    return render_template("login.html", title='Login')
+@app.route("/register")
+def registerPage():
+    return render_template("register.html", title='Register')
