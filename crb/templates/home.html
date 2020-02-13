@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    {% for room in classRooms %}
+    {% for room in ClassRoom.query.all() %}
         {% if room.availability == True %}
             <h1>Classroom {{ room.roomNumber }} is available.</h1>
         {% else %}
