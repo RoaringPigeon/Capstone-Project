@@ -2,7 +2,7 @@
 The idea of this project is to create an web application that will allow MGSU students to freely share information regarding available classrooms for use in real-timeb basis, and further let them book any empty classrooms not in use for various activities such as group meetings, team projects, hanging out for fun, etc.
 
 # Setup
-##This project is created in Python with Flask microframework, JS, and HTML/CSS. You will first need to install Python (v3.6 or newer), and then the following modules as well using pip:
+This project is created in Python with Flask microframework, JS, and HTML/CSS. You will first need to install Python (v3.6 or newer), and then the following modules as well using pip:
 1. Clone this project repository to your local machine (PC), open cmd and navigate to the cloned folder. For example, **C:\Capstone**.
 2. Activate your virtual environment, then enter the following *pip command* to install python modules:
   > (YourVirtualEnvironment)C:\Capstone> pip install -U [NameOfModule]
