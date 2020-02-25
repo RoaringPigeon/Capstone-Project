@@ -9,12 +9,32 @@ import os
 
 classRooms = [
     {
-        'roomNumber' : '255',
+        'roomNumber' : '248',
         'availability' : True, 
         'booked' : False
     },
     {
-        'roomNumber' : '254',
+        'roomNumber' : '250',
+        'availability' : True, 
+        'booked' : False
+    },
+    {
+        'roomNumber' : '253',
+        'availability' : True, 
+        'booked' : False
+    },
+    {
+        'roomNumber' : '255',
+        'availability' : False, 
+        'booked' : False
+    },
+    {
+        'roomNumber' : '256',
+        'availability' : False, 
+        'booked' : False
+    },
+    {
+        'roomNumber' : '258',
         'availability' : False, 
         'booked' : False
     }
