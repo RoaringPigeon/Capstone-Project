@@ -9,12 +9,32 @@ import os
 
 classRooms = [
     {
-        'roomNumber' : '255',
+        'roomNumber' : '248',
         'availability' : True, 
         'booked' : False
     },
     {
-        'roomNumber' : '254',
+        'roomNumber' : '250',
+        'availability' : True, 
+        'booked' : False
+    },
+    {
+        'roomNumber' : '253',
+        'availability' : True, 
+        'booked' : False
+    },
+    {
+        'roomNumber' : '255',
+        'availability' : False, 
+        'booked' : False
+    },
+    {
+        'roomNumber' : '256',
+        'availability' : False, 
+        'booked' : False
+    },
+    {
+        'roomNumber' : '258',
         'availability' : False, 
         'booked' : False
     }
@@ -109,7 +129,7 @@ def email_confirmed(token):
     db.session.commit()
     print(user.username, user.email_confirmed)  # For debugging
 
-    return '<h1>Thank you. Your account is activated. Please Sign-in.</h1>'
+    return redirect(url_for('login')), flash ('Thank you. Your account is now activated. Please Sign-in.', 'success')
 
 @app.route("/logout")
 def logout():
