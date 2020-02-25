@@ -109,7 +109,7 @@ def email_confirmed(token):
     db.session.commit()
     print(user.username, user.email_confirmed)  # For debugging
 
-    return '<h1>Thank you. Your account is activated. Please Sign-in.</h1>'
+    return redirect(url_for('login')), flash ('Thank you. Your account is now activated. Please Sign-in.', 'success')
 
 @app.route("/logout")
 def logout():
