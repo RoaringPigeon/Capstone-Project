@@ -11,22 +11,21 @@
     <small class="text-muted">Last updated 3 mins ago</small>
 </div>
 
-<!--Status: ClassRooms PSC 2F #1-->
+<!--Status: ClassRooms PSC 2F #1 (PSC 248, 250, 253)-->
 <div class="card-deck">
     <div class="card">
         <div class="card-header text-white bg-info mb-3">PSC 248</div>
         <div class="card-body">
             <h5 class="card-title">Robotics LAB</h5>
             <p class="card-text">Room Status: </p>
-            {% if 255.availability == True %}
+            {% if classRooms[0].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
-            <p class="card-text text-secondary">Not available.</p>
+            <p class="card-text text-secondary">Not available</p>
             {% endif %}
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</button>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
     <div class="card">
@@ -34,15 +33,14 @@
         <div class="card-body">
             <h5 class="card-title">PSC 250</h5>
             <p class="card-text">Room Status: </p>
-            {% if 255.availability == True %}
+            {% if classRooms[1].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
-            <p class="card-text text-secondary">Not available.</p>
+            <p class="card-text text-secondary">Not available</p>
             {% endif %}
             <a href="#" class="btn btn-primary"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
     <div class="card">
@@ -50,15 +48,14 @@
         <div class="card-body">
             <h5 class="card-title">PSC 253</h5>
             <p class="card-text">Room Status: </p>
-            {% if 255.availability == True %}
+            {% if classRooms[2].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
-            <p class="card-text text-secondary">Not available.</p>
+            <p class="card-text text-secondary">Not available</p>
             {% endif %}
             <a href="#" class="btn btn-primary"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
 </div><br>
@@ -70,15 +67,14 @@
         <div class="card-body">
             <h5 class="card-title">PSC 255</h5>
             <p class="card-text">Room Status: </p>
-            {% if 255.availability == True %}
+            {% if classRooms[3].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
-            <p class="card-text text-secondary">Not available.</p>
+            <p class="card-text text-secondary">Not available</p>
             {% endif %}
             <a href="#" class="btn btn-primary"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
     <div class="card">
@@ -86,15 +82,14 @@
         <div class="card-body">
             <h5 class="card-title">PSC 256</h5>
             <p class="card-text">Room Status: </p>
-            {% if 255.availability == True %}
+            {% if classRooms[4].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
-            <p class="card-text text-secondary">Not available.</p>
+            <p class="card-text text-secondary">Not available</p>
             {% endif %}
             <a href="#" class="btn btn-primary"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
     <div class="card">
@@ -102,15 +97,14 @@
         <div class="card-body">
             <h5 class="card-title">PSC 258</h5>
             <p class="card-text">Room Status: </p>
-            {% if 255.availability == True %}
+            {% if classRooms[5].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
-            <p class="card-text text-secondary">Not available.</p>
+            <p class="card-text text-secondary">Not available</p>
             {% endif %}
             <a href="#" class="btn btn-primary"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
 </div>
@@ -141,4 +135,5 @@
         </div>
     </div>
 </div>
+
 {% endblock content %}
