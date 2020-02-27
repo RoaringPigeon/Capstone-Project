@@ -1,7 +1,20 @@
-# Capstone-Project
-The idea of this project is to create an application that will allow college students to "book" classrooms, 
-that don't currently have a class in them, for their student group's study.
+# Capstone-Project: ClassroomBooker
+The idea of this project is to create an web application that will allow MGSU students/faculties to freely share information regarding available classrooms for use in real-time basis, and further let them book any empty classrooms not in use for various activities such as group meetings, team projects, hanging out for fun, etc.
 
-This code is created in Flask framework and uses python, JS, HTML, and CSS. You will need to install pip, python, and flask on your computer to run it.
-Once these are installed, you can navigate to the folder in your command prompt and type "python capstone.py" in order to runn it. Finally, you can open a web
-browser and go to "localhost:5000" in your URL bar.
+# Setup
+This project is created in Python with Flask microframework, JS, and HTML/CSS. You will first need to install Python (v3.6 or newer), and then the following modules as well using pip:
+1. Clone this project repository to your local machine (PC), open cmd and navigate to the cloned folder. For example, **C:\Capstone**.
+2. Activate your virtual environment, then enter the following *pip command* to install python modules:
+  > (YourVirtualEnvironment)C:\Capstone> pip install -U [NameOfModule]
+* List of required modules:
+  - flask
+  - Flask-SQLAlchemy
+  - Flask-WTF
+  - flask-bcrypt
+  - flask-login
+  - Pillow
+  
+3. Once these modules are installed, enter the following command in command line prompt to run:
+  > (YourVirtualEnvironment)C:\Capstone> python run.py
+4. You will see the flask app is running now. Open your browser, and go to the URL displayed in your command prompt or
+  > localhost:5000
