@@ -23,7 +23,8 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"><img
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"
+                data-whatever1={{classRooms[0].roomNumber}} data-whatever2={{classRooms[0].id}}><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</button>
         </div>
@@ -38,9 +39,10 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"
+                data-whatever1={{classRooms[1].roomNumber}} data-whatever2={{classRooms[1].id}}><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
+                </img>Report/Book</button>
         </div>
     </div>
     <div class="card">
@@ -53,9 +55,10 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"
+                data-whatever1={{classRooms[2].roomNumber}} data-whatever2={{classRooms[2].id}}><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
+                </img>Report/Book</button>
         </div>
     </div>
 </div><br>
@@ -72,9 +75,10 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"
+                data-whatever1={{classRooms[3].roomNumber}} data-whatever2={{classRooms[3].id}}><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
+                </img>Report/Book</button>
         </div>
     </div>
     <div class="card">
@@ -87,9 +91,10 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"
+                data-whatever1={{classRooms[4].roomNumber}} data-whatever2={{classRooms[4].id}}><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
+                </img>Report/Book</button>
         </div>
     </div>
     <div class="card">
@@ -102,9 +107,10 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"
+                data-whatever1={{classRooms[5].roomNumber}} data-whatever2={{classRooms[5].id}}><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
+                </img>Report/Book</button>
         </div>
     </div>
 </div>
@@ -116,10 +122,11 @@
         <div class="modal-content">
             <!-- Menu: Share Room's Status -->
             <div class="modal-header">
-                <h5 class="modal-title" id="roombookingLabel">Share Status with Other Users</h5>
+                <h5 class="modal-title" id="roomstatusLabel">Share Status with Other Users</h5>
             </div>
             <div class="modal-body">
-                ...
+                <a id="set-available" href="#">Available</a><i class="material-icons">lock_open</i>
+                <a id="set-not-available" href="#">Not Available</a><i class="material-icons">lock</i>
             </div>
             <!-- Menu: Room Booking -->
             <div class="modal-header">

@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
 from crb import app, db, bcrypt
 from crb.forms import RegistrationForm, LoginForm
 from crb.models import User, ClassRoom
@@ -7,38 +7,6 @@ from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import os
 
-classRooms = [
-    {
-        'roomNumber' : '248',
-        'availability' : True, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '250',
-        'availability' : True, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '253',
-        'availability' : True, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '255',
-        'availability' : False, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '256',
-        'availability' : False, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '258',
-        'availability' : False, 
-        'booked' : False
-    }
-]
 mail_settings = {
     "MAIL_SERVER": 'smtp.gmail.com',
     "MAIL_PORT": 465,
@@ -55,11 +23,55 @@ s = URLSafeTimedSerializer('ThisIsSecret')
 
 @app.route("/home")
 def home():
-    return render_template("home.html", title='Home', classRooms=classRooms)
+    # querying records of ClassRoom table, and send it home.html for displaying status
+    rooms = ClassRoom.query.order_by(ClassRoom.id).all()
+    print(rooms)
+    return render_template("home.html", title='Home', classRooms=rooms)
 
 @app.route("/about")
 def about():
     return render_template("about.html", title='About')
+
+@app.route("/roomstatus", methods=['POST', 'GET'])
+# Only Admin account should access this page
+# Add a new classroom to site.db (ClassRoom table, refer to model.py)
+def roomstatus():
+    if request.method == 'POST':
+        roomNumber = request.form['roomNumber']
+        new_room = ClassRoom(roomNumber=roomNumber)
+        try:
+            db.session.add(new_room)
+            db.session.commit()
+            return redirect('/roomstatus')
+        except:
+            return 'There was an issue adding a new classroom'
+    else:
+        rooms = ClassRoom.query.order_by(ClassRoom.id).all()
+        print(rooms)
+        return render_template('roomstatus.html', rooms=rooms, title='roomstatus manager')
+
+@app.route('/deleteroom/<int:id>')
+def delete_room(id):
+    room_to_delete = ClassRoom.query.get_or_404(id)
+    try:
+        db.session.delete(room_to_delete)
+        db.session.commit()
+        return redirect('/roomstatus')
+    except:
+        return 'There was a problem deleting that classroom'
+
+@app.route("/updateroom/<int:id>/<int:available>")
+def update_room_availability(id, available):
+    room = ClassRoom.query.get_or_404(id)
+    check = available
+    print(check)
+    if check == 1:
+        room.availability = True
+        db.session.commit()
+    else:
+        room.availability = False
+        db.session.commit()
+    return redirect('/home')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

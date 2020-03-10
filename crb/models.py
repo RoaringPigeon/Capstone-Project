@@ -24,4 +24,4 @@ class ClassRoom(db.Model):
     # booked = db.Column(db.Boolean, unique=False, default=False)
 
     def __repr__(self):  # method for debugging/test
-        return f"ClassRoom('{self.roomNumber}', '{self.availability}', '{self.booked}')"
+        return f"ClassRoom('{self.roomNumber}', '{self.availability}')"
