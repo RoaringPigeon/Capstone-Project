@@ -22,7 +22,7 @@ class ClassRoom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     roomNumber = db.Column(db.String(3), unique=True, nullable=False)
     availability = db.Column(db.Boolean, unique=False, default=True)
-    # booked = db.Column(db.Boolean, unique=False, default=False)
+    booked = db.Column(db.Boolean, unique=False, default=False)
 
     def __repr__(self):  # method for debugging/test
         return f"ClassRoom('{self.roomNumber}', '{self.availability}', '{self.booked}')"

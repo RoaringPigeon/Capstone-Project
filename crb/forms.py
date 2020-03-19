@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, HiddenField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from crb.models import User
 
@@ -42,3 +42,7 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('An account has already been created with this Email.')
+
+class BookForm(FlaskForm):
+    roomNumber = HiddenField('Room_Number')
+    submit = SubmitField('Confirm')

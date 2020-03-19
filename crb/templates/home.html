@@ -23,7 +23,7 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roombooking"><img
+            <button type="button" class="btn btn-primary book-btn" id="PSC_248" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</button>
         </div>
@@ -38,7 +38,7 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <a href="#" class="btn btn-primary book-btn" id="PSC_250" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
         </div>
@@ -53,7 +53,7 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <a href="#" class="btn btn-primary book-btn" id="PSC_253" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
         </div>
@@ -72,7 +72,7 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <a href="#" class="btn btn-primary book-btn" id="PSC_255" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
         </div>
@@ -87,7 +87,7 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <a href="#" class="btn btn-primary book-btn" id="PSC_256" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
         </div>
@@ -102,7 +102,7 @@
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary"><img
+            <a href="#" class="btn btn-primary book-btn" id="PSC_258" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Report/Book</a>
         </div>
@@ -115,23 +115,25 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!-- Menu: Share Room's Status -->
-            <div class="modal-header">
-                <h5 class="modal-title" id="roombookingLabel">Share Status with Other Users</h5>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <!-- Menu: Room Booking -->
-            <div class="modal-header">
-                <h5 class="modal-title" id="roombookingLabel">Book this room</h5>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
-            </div>
+            <form method="POST" action="">
+                {{ form.csrf_token() }}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roombookingLabel">Share Status with Other Users</h5>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <!-- Menu: Room Booking -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roombookingLabel">Book this room</h5>
+                </div>
+                {{ form.roomNumber.label(class="modal-body modal-form-label") }}
+                {{ form.roomNumber(class="modal-body modal-form-roomNumber", value="") }}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{ form.submit(class= "btn btn-primary book-confirm") }}
+                </div>
+            </form>
         </div>
     </div>
 </div>

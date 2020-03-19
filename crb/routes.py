@@ -3,45 +3,14 @@ import os
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from crb import app, db, bcrypt
-from crb.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from crb.forms import RegistrationForm, LoginForm, UpdateAccountForm, BookForm
 from crb.models import User, ClassRoom
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 
 
-classRooms = [
-    {
-        'roomNumber' : '248',
-        'availability' : True, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '250',
-        'availability' : True, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '253',
-        'availability' : True, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '255',
-        'availability' : False, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '256',
-        'availability' : False, 
-        'booked' : False
-    },
-    {
-        'roomNumber' : '258',
-        'availability' : False, 
-        'booked' : False
-    }
-]
+
 mail_settings = {
     "MAIL_SERVER": 'smtp.gmail.com',
     "MAIL_PORT": 465,
@@ -54,11 +23,26 @@ app.config.update(mail_settings)
 mail = Mail(app)
 s = URLSafeTimedSerializer('ThisIsSecret')
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 
-@app.route("/home")
+@app.route("/home", methods=['GET', 'POST'])
 def home():
-    return render_template("home.html", title='Home', classRooms=classRooms)
+    classRooms = ClassRoom.query.all()
+    form = BookForm()
+    if form.validate_on_submit():
+        n = form.roomNumber.data
+        r = ClassRoom.query.filter_by(roomNumber=n).all()[0]
+        if r.availability == True:
+            r.availability = False
+            r.boooked = True
+        else:
+            r.availability = True
+            r.booked = False
+        db.session.commit()
+        
+        flash(f'You have successfully booked room {n}.', 'success')
+        return redirect(url_for('home'))
+    return render_template("home.html", title='Home', classRooms=classRooms, form=form)
 
 @app.route("/about")
 def about():
@@ -169,3 +153,4 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title="Account", image_file=image_file, form=form)
+
