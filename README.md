@@ -16,9 +16,12 @@ This project is created in Python with Flask microframework, JS, and HTML/CSS. Y
   
 3. Once these modules are installed, enter the following command in command line prompt to run:
   > (YourVirtualEnvironment)C:\Capstone> python run.py
-  You may need to set some environment variables if you receive a "KeyError: 'EMAIL_USER' ". You'll want to copy and paste these next two 
-  lines into your command line.
+  You may need to set some environment variables if you receive a "KeyError: 'EMAIL_USER' ". 
+  You'll want to copy and paste these next two lines into your command line.
+  
   set EMAIL_USER=mgacabstone.crb@gmail.com
+  
   set EMAIL_PASSWORD=hcezrgifswvsviyc
+  
 4. You will see the flask app is running now. Open your browser, and go to the URL displayed in your command prompt or
   > localhost:5000
