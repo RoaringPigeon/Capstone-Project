@@ -35,12 +35,14 @@ def home():
         if r.availability == True:
             r.availability = False
             r.boooked = True
+            flash(f'You have successfully booked room {n}.', 'success')
         else:
             r.availability = True
             r.booked = False
+            flash(f'You have canceled your booking of room {n}.', 'success')
         db.session.commit()
         
-        flash(f'You have successfully booked room {n}.', 'success')
+        
         return redirect(url_for('home'))
     return render_template("home.html", title='Home', classRooms=classRooms, form=form)
 
