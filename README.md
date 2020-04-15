@@ -20,9 +20,9 @@ This project is created in Python with Flask microframework, JS, and HTML/CSS. Y
   You may need to set some environment variables if you receive a "KeyError: 'EMAIL_USER' ". 
   You'll want to copy and paste the following two lines commands into your CLI and executes:
   
-  set EMAIL_USER=mgacabstone.crb@gmail.com
+  set EMAIL_USER=YourGoogleEmailAddress@gmail.com
   
-  set EMAIL_PASSWORD=zdulswfyxonrdull
+  set EMAIL_PASSWORD=YourGoogleAppPassword
   
 4. You will see the flask app is running now. Open your browser, and go to the URL displayed in your command prompt or
   > localhost:5000
