@@ -17,9 +17,12 @@
         <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[0].roomNumber }}</div>
         <div class="card-body">
             <input type="hidden" id="room_status_{{ classRooms[0].roomNumber }}" value="{{ classRooms[0].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[0].roomNumber }}" value="{{ classRooms[0].pending }}">
             <h5 class="card-title">Robotics LAB</h5>
             <p class="card-text">Room Status: </p>
-            {% if classRooms[0].availability == True %}
+            {% if classRooms[0].pending == True %}
+            <p class="card-text text-warning"> Request Pending</p>
+            {% elif classRooms[0].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
@@ -33,9 +36,12 @@
         <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[1].roomNumber }}</div>
         <div class="card-body">
             <input type="hidden" id="room_status_{{ classRooms[1].roomNumber }}" value="{{ classRooms[1].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[1].roomNumber }}" value="{{ classRooms[1].pending }}">
             <h5 class="card-title">PSC {{ classRooms[1].roomNumber }}</h5>
             <p class="card-text">Room Status: </p>
-            {% if classRooms[1].availability == True %}
+            {% if classRooms[1].pending == True %}
+            <p class="card-text text-warning"> Request Pending</p>
+            {% elif classRooms[1].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
@@ -49,9 +55,12 @@
         <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[2].roomNumber }}</div>
         <div class="card-body">
             <input type="hidden" id="room_status_{{ classRooms[2].roomNumber }}" value="{{ classRooms[2].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[2].roomNumber }}" value="{{ classRooms[2].pending }}">
             <h5 class="card-title">PSC {{ classRooms[2].roomNumber }}</h5>
             <p class="card-text">Room Status: </p>
-            {% if classRooms[2].availability == True %}
+            {% if classRooms[2].pending == True %}
+            <p class="card-text text-warning"> Request Pending</p>
+            {% elif classRooms[2].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
@@ -69,9 +78,12 @@
         <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[3].roomNumber }}</div>
         <div class="card-body">
             <input type="hidden" id="room_status_{{ classRooms[3].roomNumber }}" value="{{ classRooms[3].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[3].roomNumber }}" value="{{ classRooms[3].pending }}">
             <h5 class="card-title">PSC {{ classRooms[3].roomNumber }}</h5>
             <p class="card-text">Room Status: </p>
-            {% if classRooms[3].availability == True %}
+            {% if classRooms[3].pending == True %}
+            <p class="card-text text-warning"> Request Pending</p>
+            {% elif classRooms[3].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
@@ -85,9 +97,12 @@
         <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[4].roomNumber }}</div>
         <div class="card-body">
             <input type="hidden" id="room_status_{{ classRooms[4].roomNumber }}" value="{{ classRooms[4].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[4].roomNumber }}" value="{{ classRooms[4].pending }}">
             <h5 class="card-title">PSC {{ classRooms[4].roomNumber }}</h5>
             <p class="card-text">Room Status: </p>
-            {% if classRooms[4].availability == True %}
+            {% if classRooms[4].pending == True %}
+            <p class="card-text text-warning"> Request Pending</p>
+            {% elif classRooms[4].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
@@ -101,9 +116,12 @@
         <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[5].roomNumber }}</div>
         <div class="card-body">
             <input type="hidden" id="room_status_{{ classRooms[5].roomNumber }}" value="{{ classRooms[5].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[5].roomNumber }}" value="{{ classRooms[5].pending }}">
             <h5 class="card-title">PSC {{ classRooms[5].roomNumber }}</h5>
             <p class="card-text">Room Status: </p>
-            {% if classRooms[5].availability == True %}
+            {% if classRooms[5].pending == True %}
+            <p class="card-text text-warning"> Request Pending</p>
+            {% elif classRooms[5].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
@@ -124,7 +142,7 @@
             <form method="POST" action="">
                 {{ form.csrf_token() }}
                 <div class="modal-header">
-                    <h5 class="modal-title" id="roombookingLabel">Share Status with Other Users</h5>
+                    <h5 class="modal-title" id="roombookingLabel">Current Status of Room</h5>
                 </div>
                 <div class="modal-body">
                     ...

@@ -32,6 +32,9 @@
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         {% if current_user.is_authenticated %}
+                            {% if current_user.admin == True %}
+                            <a class="nav-item nav-link" href="{{ url_for('admin') }}">Admin</a>
+                            {% endif %}
                             <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
                             <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
                         {% else %}
@@ -58,6 +61,8 @@
                 {% endwith %}
                 {% block content %}{% endblock %}
             </div>
+            
+            {% if 'admin' in rule.rule %}
             <div class="col-md-4">
                 <div class="content-section">
                     <h3>Our Sidebar</h3>
@@ -69,6 +74,8 @@
                     </p>
                 </div>
             </div>
+            {% endif %}
+
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -81,6 +88,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/Modal_Functions.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/Admin_Functions.js') }}"></script>
 </body>
 
 </html>

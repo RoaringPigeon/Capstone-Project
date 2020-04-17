@@ -3,8 +3,8 @@ import os
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from crb import app, db, bcrypt
-from crb.forms import RegistrationForm, LoginForm, UpdateAccountForm, BookForm
-from crb.models import User, ClassRoom
+from crb.forms import RegistrationForm, LoginForm, UpdateAccountForm, BookForm, ApproveForm
+from crb.models import User, Room, Request
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
@@ -26,25 +26,26 @@ s = URLSafeTimedSerializer('ThisIsSecret')
 @app.route('/', methods=['GET', 'POST'])
 
 @app.route("/home", methods=['GET', 'POST'])
+@login_required
 def home():
-    classRooms = ClassRoom.query.all()
+    rule = request.url_rule
+    classRooms = Room.query.all()
     form = BookForm()
     if form.validate_on_submit():
         n = form.roomNumber.data
-        r = ClassRoom.query.filter_by(roomNumber=n).all()[0]
+        r = Room.query.filter_by(roomNumber=n).all()[0]
         if r.availability == True:
-            r.availability = False
-            r.boooked = True
-            flash(f'You have successfully booked room {n}.', 'success')
+            r.pending = True
+            request1 = Request(requestingUser = current_user.id, requestedRoom = r.id)
+            db.session.add(request1)
+            flash(f'Request for room {n} has been sent.', 'success')
         else:
-            r.availability = True
-            r.booked = False
-            flash(f'You have canceled your booking of room {n}.', 'success')
+            flash(f'Room {n} is not available at this time.', 'danger')
         db.session.commit()
         
         
         return redirect(url_for('home'))
-    return render_template("home.html", title='Home', classRooms=classRooms, form=form)
+    return render_template("home.html", title='Home', classRooms=classRooms, form=form, rule=rule)
 
 @app.route("/about")
 def about():
@@ -52,6 +53,7 @@ def about():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    rule = request.url_rule
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
@@ -63,10 +65,11 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login unsuccessful. Please check email and password.', 'danger')
-    return render_template("login.html", title='Login', form=form)
+    return render_template("login.html", title='Login', rule=rule, form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    rule = request.url_rule
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
@@ -96,7 +99,7 @@ def register():
         mail.send(msg)
         return redirect(url_for('login'))
 
-    return render_template("register.html", title='Register', form = form)
+    return render_template("register.html", title='Register', rule = rule, form = form)
 
 @app.route("/emailsent/<message>")
 def emailsent(message):
@@ -140,6 +143,7 @@ def save_picture(form_picture):
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
+    rule = request.url_rule
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -154,5 +158,34 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('account.html', title="Account", image_file=image_file, form=form)
+    return render_template('account.html', title="Account", image_file=image_file, rule=rule, form=form)
 
+@app.route("/admin", methods=['GET', 'POST'])
+@login_required
+def admin():
+    rule = request.url_rule
+    form = ApproveForm()
+    classRooms = Room.query.all()
+    requests = Request.query.all()
+    if current_user.admin == True:
+        if form.validate_on_submit():
+            room = Room.query.filter_by(roomNumber = form.roomNumber.data).first()
+            request1 = Request.query.filter_by(id=form.request.data).first()
+            user = request1.requester.username
+            if form.choice.data == 'approved':
+                room.pending=False
+                room.availability=False
+                room.booked=True                
+                db.session.delete(request1)
+                db.session.commit()
+                flash(f'Request for room {room.roomNumber} by {user} has been approved.', 'success')
+                return redirect(url_for('admin'))
+            else:
+                room.pending = False
+                db.session.delete(request1)
+                db.session.commit()
+                flash(f'Request for room {room.roomNumber} by {user} has been denied.', 'warning')
+                return redirect(url_for('admin'))
+    else:
+        return redirect(url_for('home'))
+    return render_template('admin.html', title="Administrator", classRooms = classRooms, requests = requests, form=form, rule=rule)

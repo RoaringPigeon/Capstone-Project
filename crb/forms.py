@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, HiddenField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, HiddenField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from crb.models import User
 
@@ -46,3 +46,9 @@ class UpdateAccountForm(FlaskForm):
 class BookForm(FlaskForm):
     roomNumber = HiddenField('Room_Number')
     submit = SubmitField('Confirm')
+
+class ApproveForm(FlaskForm):
+    roomNumber = HiddenField('Room_Number')
+    request = HiddenField('Request_Number')
+    choice = RadioField('Action to be taken:', choices=[('approved', 'Approve'), ('denied', 'Deny')], default='approved', validators = [DataRequired()])
+    submit = SubmitField('Submit')

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for request in requests %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ url_for('static', filename= 'profile_pics/' + request.requester.image_file) }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ request.requester.username }}</a>
+                </div>
+                <h2><a class="article-title" href="#">Room Requested for Booking</a></h2>
+                <p class="article-content">{{ request.requested.roomNumber }}</p>
+                <a href="#" class="btn btn-primary approve-btn" id="PSC_{{ request.requested.roomNumber }}" data-toggle="modal" data-target="#roombooking"><img
+                    src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
+                </img>Approve/Deny</a>
+            </div>
+        </article>
+
+        <div class="modal fade" id="roombooking" tabindex="-1" role="dialog" aria-labelledby="roombookingLabel"aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Menu: Share Room's Status -->
+                <form method="POST" action="">
+                    {{ form.csrf_token() }}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="roombookingLabel">Current Status of Room</h5>
+                    </div>
+                    <input type="hidden", class="request-id", value="{{ request.id }}">
+                    {{ form.roomNumber(class="admin-room", value="") }}
+                    {{ form.request(class="admin-request", value="") }}
+                    <div class="modal-body">
+                        {{ request.requester.username }} has requested to book this room.
+                    </div>
+                    <!-- Menu: Room Booking -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="roombookingLabel">Book this room</h5>
+                    </div>
+                    <section class="light">
+                        {{form.choice.label(class="modal-body modal-form-label")}}
+                        {{form.choice(class="light", style="list-style-type: none")}}
+                      </section>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        {{ form.submit(class= "btn btn-primary book-confirm") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
