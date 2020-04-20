@@ -13,14 +13,14 @@ function addHoverHandler(element) {
         let pending = document.getElementById("room_pending_" + active).value.toString();
         if (status == "False"){
             document.getElementsByClassName("book-confirm")[0].value = "Not Available";
-            document.getElementsByClassName("modal-body")[0].innerHTML = "This room is already booked and is not currently available";
+            document.getElementsByClassName("current-booking-status")[0].innerHTML = "This room is already booked and is not currently available";
         }
         else if(pending == "True"){
             document.getElementsByClassName("book-confirm")[0].value = "Confirm";
-            document.getElementsByClassName("modal-body")[0].innerHTML = "A request is pending for this room. \n You may still request to book this room.";
+            document.getElementsByClassName("current-booking-status")[0].innerHTML = "A request is pending for this room. \n You may still request to book this room.";
         }
         else{
-            document.getElementsByClassName("modal-body")[0].innerHTML = "This room is not being used and is available to be booked.";
+            document.getElementsByClassName("current-booking-status")[0].innerHTML = "This room is not being used and is available to be booked.";
         }
         document.getElementsByClassName("modal-form-label")[0].innerHTML = "PSC_" + active;
         document.getElementsByClassName("modal-form-roomNumber")[0].value = active;

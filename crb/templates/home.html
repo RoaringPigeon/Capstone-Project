@@ -8,144 +8,152 @@
     </ol>
 </nav>
 <div>
+    <!-- Needs to update this part later to reflect real-time (server base) -->
     <small class="text-muted">Last updated 3 mins ago</small>
 </div>
-
-<!--Status: ClassRooms PSC 2F #1 (PSC 248, 250, 253)-->
+<!-- This will dynamically populate the page with rooms -->
+{% for i in range(1, (f+1)) %}
+{% set x = (loop.index * 3) %}
 <div class="card-deck">
     <div class="card">
-        <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[0].roomNumber }}</div>
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[x - 3].roomNumber }}</div>
         <div class="card-body">
-            <input type="hidden" id="room_status_{{ classRooms[0].roomNumber }}" value="{{ classRooms[0].availability }}">
-            <input type="hidden" id="room_pending_{{ classRooms[0].roomNumber }}" value="{{ classRooms[0].pending }}">
-            <h5 class="card-title">Robotics LAB</h5>
+            <input type="hidden" id="room_status_{{ classRooms[x - 3].roomNumber }}" value="{{ classRooms[x - 3].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[x - 3].roomNumber }}" value="{{ classRooms[x - 3].pending }}">
+
+            <h5 class="card-title">{{classRooms[x-3].roomNumber}}</h5>
+            <!-- Room Status If statements -->
             <p class="card-text">Room Status: </p>
-            {% if classRooms[0].pending == True %}
-            <p class="card-text text-warning"> Request Pending</p>
-            {% elif classRooms[0].availability == True %}
+            {% if classRooms[x - 3].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[x - 3].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[0].roomNumber }}" data-toggle="modal" data-target="#roombooking"><img
-                    src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</button>
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[x - 3].roomNumber}} data-whatever2={{classRooms[x - 3].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[x - 3].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
         </div>
     </div>
+
     <div class="card">
-        <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[1].roomNumber }}</div>
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[x - 2].roomNumber }}</div>
         <div class="card-body">
-            <input type="hidden" id="room_status_{{ classRooms[1].roomNumber }}" value="{{ classRooms[1].availability }}">
-            <input type="hidden" id="room_pending_{{ classRooms[1].roomNumber }}" value="{{ classRooms[1].pending }}">
-            <h5 class="card-title">PSC {{ classRooms[1].roomNumber }}</h5>
+            <input type="hidden" id="room_status_{{ classRooms[x - 2].roomNumber }}" value="{{ classRooms[x - 2].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[x - 2].roomNumber }}" value="{{ classRooms[x - 2].pending }}">
+
+            <h5 class="card-title">{{classRooms[x-2].roomNumber}}</h5>
+            <!-- Room Status If statements -->
             <p class="card-text">Room Status: </p>
-            {% if classRooms[1].pending == True %}
-            <p class="card-text text-warning"> Request Pending</p>
-            {% elif classRooms[1].availability == True %}
+            {% if classRooms[x - 2].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[x - 2].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary book-btn" id="PSC_{{ classRooms[1].roomNumber }}" data-toggle="modal" data-target="#roombooking"><img
-                    src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[x - 2].roomNumber}} data-whatever2={{classRooms[x - 2].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[x - 2].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
         </div>
     </div>
+
     <div class="card">
-        <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[2].roomNumber }}</div>
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[x - 1].roomNumber }}</div>
         <div class="card-body">
-            <input type="hidden" id="room_status_{{ classRooms[2].roomNumber }}" value="{{ classRooms[2].availability }}">
-            <input type="hidden" id="room_pending_{{ classRooms[2].roomNumber }}" value="{{ classRooms[2].pending }}">
-            <h5 class="card-title">PSC {{ classRooms[2].roomNumber }}</h5>
+            <input type="hidden" id="room_status_{{ classRooms[x - 1].roomNumber }}" value="{{ classRooms[x - 1].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[x - 1].roomNumber }}" value="{{ classRooms[x - 1].pending }}">
+
+            <h5 class="card-title">{{classRooms[x-1].roomNumber}}</h5>
+            <!-- Room Status If statements -->
             <p class="card-text">Room Status: </p>
-            {% if classRooms[2].pending == True %}
-            <p class="card-text text-warning"> Request Pending</p>
-            {% elif classRooms[2].availability == True %}
+            {% if classRooms[x - 1].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[x - 1].availability == True %}
             <p class="card-text text-success">Available</p>
             {% else %}
             <p class="card-text text-secondary">Not available</p>
             {% endif %}
-            <a href="#" class="btn btn-primary book-btn" id="PSC_{{ classRooms[2].roomNumber }}" data-toggle="modal" data-target="#roombooking"><img
-                    src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[x - 1].roomNumber}} data-whatever2={{classRooms[x - 1].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[x - 1].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
         </div>
     </div>
 </div><br>
-
-<!--Status: ClassRooms PSC 2F #2-->
+{% endfor %}
 <div class="card-deck">
-    <div class="card">
-        <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[3].roomNumber }}</div>
-        <div class="card-body">
-            <input type="hidden" id="room_status_{{ classRooms[3].roomNumber }}" value="{{ classRooms[3].availability }}">
-            <input type="hidden" id="room_pending_{{ classRooms[3].roomNumber }}" value="{{ classRooms[3].pending }}">
-            <h5 class="card-title">PSC {{ classRooms[3].roomNumber }}</h5>
-            <p class="card-text">Room Status: </p>
-            {% if classRooms[3].pending == True %}
-            <p class="card-text text-warning"> Request Pending</p>
-            {% elif classRooms[3].availability == True %}
-            <p class="card-text text-success">Available</p>
-            {% else %}
-            <p class="card-text text-secondary">Not available</p>
-            {% endif %}
-            <a href="#" class="btn btn-primary book-btn" id="PSC_{{ classRooms[3].roomNumber }}" data-toggle="modal" data-target="#roombooking"><img
-                    src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[4].roomNumber }}</div>
-        <div class="card-body">
-            <input type="hidden" id="room_status_{{ classRooms[4].roomNumber }}" value="{{ classRooms[4].availability }}">
-            <input type="hidden" id="room_pending_{{ classRooms[4].roomNumber }}" value="{{ classRooms[4].pending }}">
-            <h5 class="card-title">PSC {{ classRooms[4].roomNumber }}</h5>
-            <p class="card-text">Room Status: </p>
-            {% if classRooms[4].pending == True %}
-            <p class="card-text text-warning"> Request Pending</p>
-            {% elif classRooms[4].availability == True %}
-            <p class="card-text text-success">Available</p>
-            {% else %}
-            <p class="card-text text-secondary">Not available</p>
-            {% endif %}
-            <a href="#" class="btn btn-primary book-btn" id="PSC_{{ classRooms[4].roomNumber }}" data-toggle="modal" data-target="#roombooking"><img
-                    src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header text-white bg-info mb-3">PSC {{ classRooms[5].roomNumber }}</div>
-        <div class="card-body">
-            <input type="hidden" id="room_status_{{ classRooms[5].roomNumber }}" value="{{ classRooms[5].availability }}">
-            <input type="hidden" id="room_pending_{{ classRooms[5].roomNumber }}" value="{{ classRooms[5].pending }}">
-            <h5 class="card-title">PSC {{ classRooms[5].roomNumber }}</h5>
-            <p class="card-text">Room Status: </p>
-            {% if classRooms[5].pending == True %}
-            <p class="card-text text-warning"> Request Pending</p>
-            {% elif classRooms[5].availability == True %}
-            <p class="card-text text-success">Available</p>
-            {% else %}
-            <p class="card-text text-secondary">Not available</p>
-            {% endif %}
-            <a href="#" class="btn btn-primary book-btn" id="PSC_{{ classRooms[5].roomNumber }}" data-toggle="modal" data-target="#roombooking"><img
-                    src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
-                </img>Report/Book</a>
-        </div>
-    </div>
-</div>
+    {% for i in range(0, m) %}
+    {% set x = y%}
+        <div class="card">
+            <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[x+i].roomNumber }}</div>
+            <div class="card-body">
+                <input type="hidden" id="room_status_{{ classRooms[x+i].roomNumber }}" value="{{ classRooms[x+i].availability }}">
+                <input type="hidden" id="room_pending_{{ classRooms[x+i].roomNumber }}" value="{{ classRooms[x+i].pending }}">
 
-<!-- Modal (Popup Menu for Report/Book button) -->
-<div class="modal fade" id="roombooking" tabindex="-1" role="dialog" aria-labelledby="roombookingLabel"
+                <h5 class="card-title">{{classRooms[x+i].roomNumber}}</h5>
+                <!-- Room Status If statements -->
+                <p class="card-text">Room Status: </p>
+                {% if classRooms[x+i].pending == True %}
+                <p class="card-text text-warning">Request Pending</p>
+                {% elif classRooms[x+i].availability == True %}
+                <p class="card-text text-success">Available</p>
+                {% else %}
+                <p class="card-text text-secondary">Not available</p>
+                {% endif %}
+                <!-- Share Status Button / Request to Book Button -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                    data-whatever1={{classRooms[x+i].roomNumber}} data-whatever2={{classRooms[x+i].id}}>
+                    <i class="far fa-comments"></i> Status</button>
+                <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[x+i].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                    <i class="far fa-calendar-alt"></i> Book</button>
+            </div>
+        </div>
+    {% endfor %}
+</div><br>
+
+<!-- Modal 1: Popup Menu for Sharing Status with other users. Check out layout.html for corresponding JS script -->
+<div class="modal fade" id="sharestatus" tabindex="-1" role="dialog" aria-labelledby="sharestatusLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!-- Menu: Share Room's Status -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="sharestatusLabel">Share Status with Other Users</h5>
+            </div>
+            <div class="modal-body share-current-status">
+                <a id="set-available" href="#">Available</a><i class="material-icons">lock_open</i>
+                <a id="set-not-available" href="#">Not Available</a><i class="material-icons">lock</i>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal 2: Popup Menu for classroom booking requests -->
+<div class="modal fade" id="roombooking" tabindex="-1" role="dialog" aria-labelledby="roombookingLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Menu: Reqest to Book -->
             <form method="POST" action="">
                 {{ form.csrf_token() }}
                 <div class="modal-header">
                     <h5 class="modal-title" id="roombookingLabel">Current Status of Room</h5>
                 </div>
-                <div class="modal-body">
-                    ...
+                <div class="modal-body current-booking-status">
+                    ..
                 </div>
                 <!-- Menu: Room Booking -->
                 <div class="modal-header">

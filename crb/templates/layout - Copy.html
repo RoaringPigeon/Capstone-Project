@@ -1,0 +1,26 @@
+<div class="card-deck">
+    <div class="card">
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ room.roomNumber }}</div>
+        <div class="card-body">
+            <input type="hidden" id="room_status_{{ room.roomNumber }}" value="{{ room.availability }}">
+            <input type="hidden" id="room_pending_{{ room.roomNumber }}" value="{{ room.pending }}">
+
+            <h5 class="card-title">Robotics LAB</h5>
+            <!-- Room Status If statements -->
+            <p class="card-text">Room Status: </p>
+            {% if room.pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif room.availability == True %}
+            <p class="card-text text-success">Available</p>
+            {% else %}
+            <p class="card-text text-secondary">Not available</p>
+            {% endif %}
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{room.roomNumber}} data-whatever2={{room.id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ room.roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
+        </div>
+    </div>
+</div><br>

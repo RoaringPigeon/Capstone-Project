@@ -1,0 +1,218 @@
+{% extends "layout.html" %}
+{% block content %}
+<!--Current Location & Last Update-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">PSC</li>
+        <li class="breadcrumb-item active" aria-current="page">2nd Floor</li>
+    </ol>
+</nav>
+<div>
+    <!-- Needs to update this part later to reflect real-time (server base) -->
+    <small class="text-muted">Last updated 3 mins ago</small>
+</div>
+
+<!--Status: ClassRooms PSC 2F #1 (PSC 248, 250, 253)-->
+<div class="card-deck">
+    <div class="card">
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[0].roomNumber }}</div>
+        <div class="card-body">
+            <input type="hidden" id="room_status_{{ classRooms[0].roomNumber }}" value="{{ classRooms[0].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[0].roomNumber }}" value="{{ classRooms[0].pending }}">
+
+            <h5 class="card-title">Robotics LAB</h5>
+            <!-- Room Status If statements -->
+            <p class="card-text">Room Status: </p>
+            {% if classRooms[0].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[0].availability == True %}
+            <p class="card-text text-success">Available</p>
+            {% else %}
+            <p class="card-text text-secondary">Not available</p>
+            {% endif %}
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[0].roomNumber}} data-whatever2={{classRooms[0].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[0].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[1].roomNumber }}</div>
+        <div class="card-body">
+            <input type="hidden" id="room_status_{{ classRooms[1].roomNumber }}" value="{{ classRooms[1].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[1].roomNumber }}" value="{{ classRooms[1].pending }}">
+
+            <h5 class="card-title">PSC {{ classRooms[1].roomNumber }}</h5>
+            <!-- Room Status If statements -->
+            <p class="card-text">Room Status: </p>
+            {% if classRooms[1].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[1].availability == True %}
+            <p class="card-text text-success">Available</p>
+            {% else %}
+            <p class="card-text text-secondary">Not available</p>
+            {% endif %}
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[1].roomNumber}} data-whatever2={{classRooms[1].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[1].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[2].roomNumber }}</div>
+        <div class="card-body">
+            <input type="hidden" id="room_status_{{ classRooms[2].roomNumber }}" value="{{ classRooms[2].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[2].roomNumber }}" value="{{ classRooms[2].pending }}">
+
+            <h5 class="card-title">PSC {{ classRooms[2].roomNumber }}</h5>
+            <!-- Room Status If statements -->
+            <p class="card-text">Room Status: </p>
+            {% if classRooms[2].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[2].availability == True %}
+            <p class="card-text text-success">Available</p>
+            {% else %}
+            <p class="card-text text-secondary">Not available</p>
+            {% endif %}
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[2].roomNumber}} data-whatever2={{classRooms[2].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[2].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
+        </div>
+    </div>
+</div><br>
+
+<!--Status: ClassRooms PSC 2F #2-->
+<div class="card-deck">
+    <div class="card">
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[3].roomNumber }}</div>
+        <div class="card-body">
+            <input type="hidden" id="room_status_{{ classRooms[3].roomNumber }}" value="{{ classRooms[3].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[3].roomNumber }}" value="{{ classRooms[3].pending }}">
+
+            <h5 class="card-title">PSC {{ classRooms[3].roomNumber }}</h5>
+            <!-- Room Status If statements -->
+            <p class="card-text">Room Status: </p>
+            {% if classRooms[3].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[3].availability == True %}
+            <p class="card-text text-success">Available</p>
+            {% else %}
+            <p class="card-text text-secondary">Not available</p>
+            {% endif %}
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[3].roomNumber}} data-whatever2={{classRooms[3].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[3].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[4].roomNumber }}</div>
+        <div class="card-body">
+            <input type="hidden" id="room_status_{{ classRooms[4].roomNumber }}" value="{{ classRooms[4].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[4].roomNumber }}" value="{{ classRooms[4].pending }}">
+
+            <h5 class="card-title">PSC {{ classRooms[4].roomNumber }}</h5>
+            <!-- Room Status If statements -->
+            <p class="card-text">Room Status: </p>
+            {% if classRooms[4].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[4].availability == True %}
+            <p class="card-text text-success">Available</p>
+            {% else %}
+            <p class="card-text text-secondary">Not available</p>
+            {% endif %}
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[4].roomNumber}} data-whatever2={{classRooms[4].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[4].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header text-white bg-info mb-3 lead">PSC {{ classRooms[5].roomNumber }}</div>
+        <div class="card-body">
+            <input type="hidden" id="room_status_{{ classRooms[5].roomNumber }}" value="{{ classRooms[5].availability }}">
+            <input type="hidden" id="room_pending_{{ classRooms[5].roomNumber }}" value="{{ classRooms[5].pending }}">
+
+            <h5 class="card-title">PSC {{ classRooms[5].roomNumber }}</h5>
+            <!-- Room Status If statements -->
+            <p class="card-text">Room Status: </p>
+            {% if classRooms[5].pending == True %}
+            <p class="card-text text-warning">Request Pending</p>
+            {% elif classRooms[5].availability == True %}
+            <p class="card-text text-success">Available</p>
+            {% else %}
+            <p class="card-text text-secondary">Not available</p>
+            {% endif %}
+            <!-- Share Status Button / Request to Book Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sharestatus"
+                data-whatever1={{classRooms[5].roomNumber}} data-whatever2={{classRooms[5].id}}>
+                <i class="far fa-comments"></i> Status</button>
+            <button type="button" class="btn btn-primary book-btn" id="PSC_{{ classRooms[5].roomNumber }}" data-toggle="modal" data-target="#roombooking">
+                <i class="far fa-calendar-alt"></i> Book</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 1: Popup Menu for Sharing Status with other users. Check out layout.html for corresponding JS script -->
+<div class="modal fade" id="sharestatus" tabindex="-1" role="dialog" aria-labelledby="sharestatusLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Menu: Share Room's Status -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="sharestatusLabel">Share Status with Other Users</h5>
+            </div>
+            <div class="modal-body share-current-status">
+                <a id="set-available" href="#">Available</a><i class="material-icons">lock_open</i>
+                <a id="set-not-available" href="#">Not Available</a><i class="material-icons">lock</i>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal 2: Popup Menu for classroom booking requests -->
+<div class="modal fade" id="roombooking" tabindex="-1" role="dialog" aria-labelledby="roombookingLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Menu: Reqest to Book -->
+            <form method="POST" action="">
+                {{ form.csrf_token() }}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roombookingLabel">Current Status of Room</h5>
+                </div>
+                <div class="modal-body current-booking-status">
+                    ...
+                </div>
+                <!-- Menu: Room Booking -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roombookingLabel">Book this room</h5>
+                </div>
+                {{ form.roomNumber.label(class="modal-body modal-form-label") }}
+                {{ form.roomNumber(class="modal-body modal-form-roomNumber", value="") }}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{ form.submit(class= "btn btn-primary book-confirm") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

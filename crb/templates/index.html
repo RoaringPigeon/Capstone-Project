@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2020 MGA Capstone Project | ClassRoomBooker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <!-- Nav start -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark p-3">
+        <div class="container-fluid">
+            <!-- Title -->
+            <a class="navbar-brand ml-4" href="#">ClassRoomBooker</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <!-- Navigation Bar List -->
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item"> <a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Contact Us</a></li>
+                </ul>
+                {% if current_user.is_authenticated %}
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"> <a class="nav-link" href="{{ url_for('login') }}">DashBoard</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+                {% else %}
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"> <a class="nav-link" href="{{ url_for('login') }}">Log In</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url_for('register') }}">Sign Up</a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav><!-- Nav End -->
+    <main>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">ClassRoomBooker</h1>
+                <h4>This is an intro & welcome message placeholder for visitors of this page. Please write short and
+                    concise 3
+                    sentences that describes what is classroombooker and its use and purpose</h4>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Feature 1</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+                        magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Feature 2</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+                        magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Feature 3</h2>
+                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id
+                        ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                        condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </main>
+    <footer class="container">
+        <p>MGSU 2020 Capstone Project | Github Repository Link | Github @jinyoungan85 @RoaringPigeon</p>
+    </footer>
+</body>
+</html>
