@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, HiddenField, RadioField
+from wtforms.fields.html5 import DateField, TimeField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from crb.models import User
 
@@ -47,6 +48,10 @@ class UpdateAccountForm(FlaskForm):
 class BookForm(FlaskForm):
     roomNumber = HiddenField('Room_Number')
     submit = SubmitField('Confirm')
+    date = HiddenField('datePicked')
+    time = HiddenField('timePicked')
+    timeSelect = TimeField('Time Desired', format="%H:%M", validators= [DataRequired()])
+    dateSelect = DateField('Date Desired', format='%Y-%m-%d', validators = [DataRequired()])
 
 class ApproveForm(FlaskForm):
     roomNumber = HiddenField('Room_Number')

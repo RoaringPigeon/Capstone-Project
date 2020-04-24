@@ -44,9 +44,11 @@ def home():
     if form.validate_on_submit():
         n = form.roomNumber.data
         r = ClassRoom.query.filter_by(roomNumber=n).first()
+        d = form.dateSelect.data
+        t = form.timeSelect.data
         if r.availability == True:
             r.pending = True
-            request1 = Request(requestingUser = current_user.id, requestedRoom = r.id)
+            request1 = Request(requestingUser = current_user.id, requestedRoom = r.id, date = d, time = t)
             db.session.add(request1)
             flash(f'Request for room {n} has been sent.', 'success')
         else:

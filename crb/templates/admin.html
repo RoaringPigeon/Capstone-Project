@@ -8,8 +8,11 @@
                     <a class="mr-2" href="#">{{ request.requester.username }}</a>
                 </div>
                 <h2><a class="article-title" href="#">Room Requested for Booking</a></h2>
-                <p class="article-content">{{ request.requested.roomNumber }}</p>
-                <a href="#" class="btn btn-primary approve-btn" id="PSC_{{ request.requested.roomNumber }}" data-toggle="modal" data-target="#roombooking"><img
+                <b class="article-content">{{ request.requested.roomNumber }}</b>
+                <input type="hidden" id="date-desired-{{ request.id }}" value="{{ request.date }}">
+                <input type="hidden" id="time-desired-{{ request.id }}" value="{{ request.time }}">
+
+                <a href="#" class="btn btn-primary approve-btn" id="PSC_{{ request.requested.roomNumber }}-{{ request.id }}" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Approve/Deny</a>
             </div>
@@ -29,6 +32,10 @@
                     {{ form.request(class="admin-request", value="") }}
                     <div class="modal-body">
                         {{ request.requester.username }} has requested to book this room.
+                        <ul style="list-style-type:none">
+                            <li><b>Date Requested: </b><div id="date-format">{{ request.date }}</div></li>
+                            <li><b>Time Requested: </b><div id="time-format">{{ request.time }}</div></li>
+                        </ul>
                     </div>
                     <!-- Menu: Room Booking -->
                     <div class="modal-header">

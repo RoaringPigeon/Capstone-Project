@@ -159,8 +159,13 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="roombookingLabel">Book this room</h5>
                 </div>
-                {{ form.roomNumber.label(class="modal-body modal-form-label") }}
-                {{ form.roomNumber(class="modal-body modal-form-roomNumber", value="") }}
+                <ul style="list-style-type: none">
+                    <li><b>Room Requested:</b>{{ form.roomNumber.label(class="modal-body modal-form-label") }}
+                        {{ form.roomNumber(class="modal-body modal-form-roomNumber", value="") }}</li>
+                    <li><b>Date Desired:   </b>{{ form.dateSelect(id="datePicker") }}</li>
+                    <li><b>Time Desired:   </b>{{ form.timeSelect(id="timePicker") }}</li>
+                </ul>
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     {{ form.submit(class= "btn btn-primary book-confirm") }}
