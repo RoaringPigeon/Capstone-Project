@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, HiddenField, RadioField
+from wtforms import (StringField, PasswordField, SubmitField, TextAreaField, HiddenField, RadioField, 
+SelectField, TextField, StringField)
 from wtforms.fields.html5 import DateField, TimeField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from crb.models import User
@@ -52,6 +53,12 @@ class BookForm(FlaskForm):
     time = HiddenField('timePicked')
     timeSelect = TimeField('Time Desired', format="%H:%M", validators= [DataRequired()])
     dateSelect = DateField('Date Desired', format='%Y-%m-%d', validators = [DataRequired()])
+    duration = SelectField('Programming Language',
+        choices=[('0.5', '0.5 Hours'), ('1', '1 Hour'), ('1.5', '1.5 Hours'), ('2', '2 Hours')],
+        validators=[DataRequired()]
+    )
+    reason = StringField('Reason for Booking', validators = 
+        [DataRequired(), Length(max=60)])
 
 class ApproveForm(FlaskForm):
     roomNumber = HiddenField('Room_Number')

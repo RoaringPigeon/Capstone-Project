@@ -152,7 +152,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="roombookingLabel">Current Status of Room</h5>
                 </div>
-                <div class="modal-body current-booking-status">
+                <div class="modal-body current-booking-status" id="current-booking-status">
                     ..
                 </div>
                 <!-- Menu: Room Booking -->
@@ -162,9 +162,30 @@
                 <ul style="list-style-type: none">
                     <li><b>Room Requested:</b>{{ form.roomNumber.label(class="modal-body modal-form-label") }}
                         {{ form.roomNumber(class="modal-body modal-form-roomNumber", value="") }}</li>
-                    <li><b>Date Desired:   </b>{{ form.dateSelect(id="datePicker") }}</li>
-                    <li><b>Time Desired:   </b>{{ form.timeSelect(id="timePicker") }}</li>
+                    <li><b>Date Desired:   </b>{{ form.dateSelect(class="modal-body", id="datePicker") }}</li>
+                    <li><b>Time Desired:   </b>{{ form.timeSelect(class="modal-body", id="timePicker") }}</li>
+                    <li><b>For How Long?   </b>{{ form.duration(class="modal-body", id="durationPicker") }}</li>
+                    <li><b>Reason for Booking?</b>
+                    {% if form.reason.errors %}
+                     {{ form.reason(class="form-control form-control-lg is-invalid", id="reasonMessage") }}
+                     <input disabled  maxlength="3" size="3" value="0" id="counter">
+                     <div class="invalid-feedback">
+                         {% for error in form.reason.errors %}
+                            <span>{{ error }}</span>
+                         {% endfor %}
+                     </div>
+                     {% else %}
+                        {{ form.reason(class="form-control form-control-lg", id="reasonMessage") }}
+                        <input disabled  maxlength="3" size="3" value="0" id="counter">
+                    {% endif %}</li>
                 </ul>
+                <script>
+                    var formErrors = {% if form.errors %}true{% else %} false{% endif %};
+                    var roomError = {{ form.roomNumber.data }};
+                        //It is too dificult to be worth it to also update the current-booking-status.
+                        //When the page reloads, it passes ".." (default value) to the variable that is passed here. 
+                        //I could work around this by adding a hidden tag to the WT Form, but I'm going to work on other issues first. 
+                </script>
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

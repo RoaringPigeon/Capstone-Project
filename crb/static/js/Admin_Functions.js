@@ -16,6 +16,10 @@ $( document ).ready(function() {
             document.getElementById("date-format").innerHTML = date[1].toString() + "/" + date[2].toString() + "/" + date[0];
             let time = document.getElementById("time-desired-" + currentRequest).value.toString().split(":");
             document.getElementById("time-format").innerHTML = time[0].toString() + ":" + time[1].toString();
+            let duration = document.getElementById("duration-desired-" + currentRequest).value.toString();
+            document.getElementById("duration-format").innerHTML = duration + " hours.";
+            let reason = document.getElementById("reason-booked-" + currentRequest).value.toString();
+            document.getElementById("reason-format").innerHTML = reason.toString();
         });    
     }
 

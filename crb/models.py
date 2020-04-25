@@ -46,6 +46,8 @@ class Request(db.Model):
     requestedRoom = db.Column(db.Integer, db.ForeignKey('class_room.id'), nullable=False) # class_room
     date = db.Column(db.String(10), unique=False, nullable=False)
     time = db.Column(db.Time, unique=False, nullable=False)
+    duration = db.Column(db.String, unique=False, nullable=False)
+    reason = db.Column(db.String, unique=False, nullable=False)
     pending = db.Column(db.Boolean, unique=False, default=True)
     approved = db.Column(db.Boolean, unique=False, default=False)
 

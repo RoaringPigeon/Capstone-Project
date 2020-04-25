@@ -46,9 +46,12 @@ def home():
         r = ClassRoom.query.filter_by(roomNumber=n).first()
         d = form.dateSelect.data
         t = form.timeSelect.data
+        dur = form.duration.data
+        reason = form.reason.data
         if r.availability == True:
             r.pending = True
-            request1 = Request(requestingUser = current_user.id, requestedRoom = r.id, date = d, time = t)
+            request1 = Request(requestingUser = current_user.id, requestedRoom = r.id, date = d, 
+                time = t, duration = dur, reason=reason)
             db.session.add(request1)
             flash(f'Request for room {n} has been sent.', 'success')
         else:

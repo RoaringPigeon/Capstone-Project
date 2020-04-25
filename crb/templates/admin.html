@@ -11,6 +11,8 @@
                 <b class="article-content">{{ request.requested.roomNumber }}</b>
                 <input type="hidden" id="date-desired-{{ request.id }}" value="{{ request.date }}">
                 <input type="hidden" id="time-desired-{{ request.id }}" value="{{ request.time }}">
+                <input type="hidden" id="duration-desired-{{ request.id }}" value="{{ request.duration }}">
+                <input type="hidden" id="reason-booked-{{ request.id }}" value="{{ request.reason }}">
 
                 <a href="#" class="btn btn-primary approve-btn" id="PSC_{{ request.requested.roomNumber }}-{{ request.id }}" data-toggle="modal" data-target="#roombooking"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
@@ -35,6 +37,8 @@
                         <ul style="list-style-type:none">
                             <li><b>Date Requested: </b><div id="date-format">{{ request.date }}</div></li>
                             <li><b>Time Requested: </b><div id="time-format">{{ request.time }}</div></li>
+                            <li><b>Duration Requested: </b><div id="duration-format">{{ request.duration }} hours.</div></li>
+                            <li><b>Reason Requested: </b><div id="reason-format">{{ request.reason }}</div></li>
                         </ul>
                     </div>
                     <!-- Menu: Room Booking -->
