@@ -43,17 +43,6 @@ function textCounter(field,field2,maxlimit)
 
 $("#reasonMessage").bind('input propertychange', function () {textCounter(this,'counter',60);})
 
-$(document).ready(function() {
-    if (formErrors) {
-        document.getElementsByClassName("modal-form-label")[0].innerHTML = "PSC_" + roomError;
-        document.getElementsByClassName("modal-form-roomNumber")[0].value = roomError;
-        //It is too dificult to be worth it to also update the current-booking-status.
-        //When the page reloads, it passes ".." (default value) to the variable that is passed here. 
-        //I could work around this by adding a hidden tag to the WT Form, but I'm going to work on other issues first. 
-        $('#roombooking').modal('show');
-    }
-});
-
 $('#tutorial-button').bind('click', function () {
     player.playVideo();    
 })
