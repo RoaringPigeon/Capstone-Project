@@ -53,3 +53,8 @@ $(document).ready(function() {
         $('#roombooking').modal('show');
     }
 });
+
+$('#tutorial-button').bind('click', function () {
+    player.playVideo();    
+})
+

@@ -26,4 +26,10 @@ $( document ).ready(function() {
 
 }
 })
+function deleteUser(user){
+    let check = confirm("Are you sure you want to delete this user?")
+    if (check){
+        window.location.href = "/deleteuser/"+user;
+    }
+}
 

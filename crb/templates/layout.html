@@ -34,7 +34,8 @@
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         {% if current_user.is_authenticated %}
-                        <a class="nav-item nav-link" href="{{ url_for('account') }}">Welcome, {{current_user.username}}</a>
+                        <a class="nav-item nav-link" href="{{ url_for('account') }}">Welcome,
+                            {{current_user.username}}</a>
                         {% if current_user.admin == True %}
                         <!-- Admin Dropdown Menu -->
                         <li class="nav-item dropdown">
@@ -45,10 +46,12 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url_for('admin') }}">Manage Booking Request</a>
                                 <a class="dropdown-item" href="{{ url_for('roomstatus') }}">Manage ClassRooms</a>
+                                <a class="dropdown-item" href="{{ url_for('users') }}">Manage Users</a>
                             </div>
                         </li>
                         {% endif %}
-                        <a class="nav-item nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a class="nav-item nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>
+                            Logout</a>
                         {% else %}
                         <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
                         <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
@@ -80,7 +83,8 @@
                     <p class='lead'>You can find how to use our service.
                         <ul class="list-group">
                             <button type="button" class="lead list-group-item list-group-item-action"
-                                data-toggle="modal" data-target="#tutorialvideo">Tutorial Video</button>
+                                id="tutorial-button" data-toggle="modal" data-target="#tutorialvideo">Tutorial
+                                Video</button>
                             <button type="button" class="lead list-group-item list-group-item-action"
                                 data-toggle="modal" data-target="#userguide">User Guide</button>
                         </ul>
@@ -92,13 +96,13 @@
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+        </script>
     <script>
         // it was previously for #roombooking modal, but due to duplicated name, changed its name to sharestatus
         $('#sharestatus').on('show.bs.modal', function (event) {
@@ -127,10 +131,33 @@
                 <h5 class="modal-title" id="tutorialvideoLabel">Watch Tutorial Video</h5>
             </div>
             <div class="modal-body">
-                Tutorial Youtube Video Embed here
+                <div id="player"></div>
+
+                <script>
+                    // 2. This code loads the IFrame Player API code asynchronously.
+                    var tag = document.createElement('script');
+
+                    tag.src = "https://www.youtube.com/iframe_api";
+                    var firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                    // 3. This function creates an <iframe> (and YouTube player)
+                    //    after the API code downloads.
+                    var player;
+                    function onYouTubeIframeAPIReady() {
+                        player = new YT.Player('player', {
+                            height: '390',
+                            width: '465',
+                            videoId: 'HCsCatvigtw',
+                        });
+                    }
+                    function stopVideo() {
+                        player.stopVideo();
+                    }
+                </script>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" onclick="stopVideo()" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -143,7 +170,7 @@
                 <h5 class="modal-title" id="userguideLabel">User Guide</h5>
             </div>
             <div class="modal-body">
-                User Guide Contents here
+                Click <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a> for a detailed guide that won't fit in the modal.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
