@@ -64,4 +64,5 @@ class ApproveForm(FlaskForm):
     roomNumber = HiddenField('Room_Number')
     request = HiddenField('Request_Number')
     choice = RadioField('Action to be taken:', choices=[('approved', 'Approve'), ('denied', 'Deny')], default='approved', validators = [DataRequired()])
+    reason = StringField('Reason for Choice', validators = [DataRequired(), Length(max=100)])
     submit = SubmitField('Submit')

@@ -21,13 +21,13 @@
             <input type="hidden" id="reason-booked-{{ request.id }}" value="{{ request.reason }}">
 
             <a href="#" class="btn btn-primary approve-btn" id="PSC_{{ request.requested.roomNumber }}-{{ request.id }}"
-                data-toggle="modal" data-target="#roombooking"><img
+                data-toggle="modal" data-target="#admin-approve"><img
                     src="{{ url_for('static', filename='chat_bubble_white_24dp.png') }}">
                 </img>Approve/Deny</a>
         </div>
     </article>
 
-    <div class="modal fade" id="roombooking" tabindex="-1" role="dialog" aria-labelledby="roombookingLabel"
+    <div class="modal fade" id="admin-approve" tabindex="-1" role="dialog" aria-labelledby="roombookingLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -64,11 +64,33 @@
                     <section class="light">
                         {{form.choice.label(class="modal-body modal-form-label")}}
                         {{form.choice(class="light", style="list-style-type: none")}}
+                        {% if form.choice.data == 'denied' %}
+                        <div class="form-group">
+                            {{ form.reason.label(class="form-control-label") }}
+                            {% if form.reason.errors %}
+                             {{ form.reason(class="form-control form-control-lg is-invalid", id="admin-reason-message", placeholder="Briefly explain your denial to the user.", autocomplete="off") }}
+                             <input disabled  maxlength="3" size="3" value="0" id="admin-counter">
+                             <div class="invalid-feedback">
+                                 {% for error in form.reason.errors %}
+                                    <span>{{ error }}</span>
+                                 {% endfor %}
+                             </div>
+                             {% else %}
+                                {{ form.reason(class="form-control form-control-lg", id="admin-reason-message", placeholder="Briefly explain your denial to the user.", autocomplete="off") }}
+                                <input disabled  maxlength="3" size="3" value="0" id="admin-counter">
+                            {% endif %}
+                        </div>
+                        {% endif %}
                     </section>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         {{ form.submit(class= "btn btn-primary book-confirm") }}
                     </div>
+                    <script>
+                        var formErrors = {% if form.errors %}true{% else %} false{% endif %};
+                        var requestID = {{ request.id }};
+                        var room = {{ request.requested.roomNumber }};
+                    </script>
                 </form>
             </div>
         </div>

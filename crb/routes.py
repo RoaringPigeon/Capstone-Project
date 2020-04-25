@@ -248,7 +248,11 @@ def admin():
                 room.pending = False
                 db.session.delete(request1)
                 db.session.commit()
-                flash(f'Request for room {room.roomNumber} by {user} has been denied.', 'warning')
+                adminMessage = form.reason.data
+                msg = Message('Status of your Room Booking Request', sender='mgacabstone.crb@gmail.com', recipients=[request1.requester.email])
+                msg.body = adminMessage
+                mail.send(msg)
+                flash(f'Request for room {room.roomNumber} by {user} has been denied. An email has been sent to the user with your message.', 'warning')
                 return redirect(url_for('admin'))
     else:
         return redirect(url_for('home'))
@@ -262,7 +266,7 @@ def users():
         return redirect(url_for('home'))
     return render_template('users.html', title="User Management", users=userList)
 @app.route('/deleteuser/<int:id>')
-# related to roomstatus.html page: delete a classroom from db
+# related to users.html. Deletes a user.
 def delete_user(id):
     user_to_delete = User.query.get_or_404(id)
     try:

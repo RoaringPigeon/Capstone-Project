@@ -1,6 +1,7 @@
 from crb import db, login_manager, bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+import datetime
 
 
 @login_manager.user_loader
@@ -58,7 +59,7 @@ db.drop_all()
 db.create_all()
 hashed_password = bcrypt.generate_password_hash("Password1").decode('utf-8')
 user1 = User(username="Andrew", email="Andrew@demo.com", password=hashed_password, admin=True, email_confirmed=True)
-user2 = User(username="Melissa", email="Melissa@demo.com", password=hashed_password, email_confirmed=True)
+user2 = User(username="Melissa", email="roaringpigeon@gmail.com", password=hashed_password, email_confirmed=True)
 room1 = ClassRoom(roomNumber = "248")
 room2 = ClassRoom(roomNumber = "250")
 room3 = ClassRoom(roomNumber = "253")
@@ -73,4 +74,7 @@ db.session.add(room3)
 db.session.add(room4)
 db.session.add(room5)
 db.session.add(room6)
+db.session.commit()
+request1 = Request(requestingUser = user2.id, requestedRoom = room1.id, date='2020-10-5', time=datetime.time(4,20,0), duration='0.5', reason='test', pending=True, approved=False)
+db.session.add(request1)
 db.session.commit()

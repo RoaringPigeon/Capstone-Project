@@ -32,4 +32,15 @@ function deleteUser(user){
         window.location.href = "/deleteuser/"+user;
     }
 }
+var choice = 'approved';
+$(document).ready(function() {
+    if (formErrors) {
+        document.getElementsByClassName("admin-request")[0].value = requestID.toString();
+        document.getElementsByClassName("admin-room")[0].value = room.toString();
+        $('#admin-approve').modal('show');
+
+    }
+});
+
+$("#admin-reason-message").bind('input propertychange', function () {textCounter(this,'admin-counter',100);})
 
