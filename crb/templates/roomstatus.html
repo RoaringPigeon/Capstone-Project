@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content">
+    <h1 style="text-align: center">Classroom Manager</h1>
+    {% if rooms|length < 1 %}
+    <h4 style="text-align: center">There are no room. Create one below.</h4>
+    {% else %}
+    <!-- Table showing Classroom # and its availability -->
+    <table class="table table-striped">
+        <tr>
+            <th>Classroom #</th>
+            <th>Available</th>
+            <th>Actions</th>
+        </tr>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.roomNumber }}</td>
+                <td>{{ room.availability }}</td>
+                <td>
+                    <a href="/deleteroom/{{room.id}}">Delete</a>
+                    <br>
+                    <a href="/updateroom/{{room.id}}/1">Set to Available</a>
+                    <br>
+                    <a href="/updateroom/{{room.id}}/0">Set to Not Available</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <div class="form">
+        <!-- Add a new classroom to the database (ClassRoom table) -->
+        <form action="/roomstatus" method="POST">
+            <input type="text" name="roomNumber" id="roomNumber">
+            <input type="submit" value="Add classroom">
+        </form>
+    </div>
+</div>
+{% endblock content %}

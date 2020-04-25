@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0", shrink-to-fit="no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" , shrink-to-fit="no">
+    <script src="https://kit.fontawesome.com/db74d38526.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% if title %}
     <title> Capstone-Project: {{title}}</title>
     {% else %}
@@ -19,26 +20,39 @@
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
             <div class="container">
-                <a class="navbar-brand mr-4" href="/">Capstone Project</a>
+                <a class="navbar-brand mr-4" href="/"><i class="fab fa-slideshare"></i> ClassRoomBooker</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                     aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                        <a class="nav-item nav-link" href="{{ url_for('home') }}">DashBoard</a>
                         <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+                        <a class="nav-item nav-link" href="{{ url_for('about') }}">Help</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         {% if current_user.is_authenticated %}
-                            <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
-                            <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-                        {% else %}
-                            <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                            <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                        <a class="nav-item nav-link" href="{{ url_for('account') }}">Welcome, {{current_user.username}}</a>
+                        {% if current_user.admin == True %}
+                        <!-- Admin Dropdown Menu -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-cog"></i> Admin Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('admin') }}">Manage Booking Request</a>
+                                <a class="dropdown-item" href="{{ url_for('roomstatus') }}">Manage ClassRooms</a>
+                            </div>
+                        </li>
                         {% endif %}
-                        
+                        <a class="nav-item nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        {% else %}
+                        <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                        <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -48,38 +62,94 @@
         <div class="row">
             <div class="col-md-8">
                 {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class = "alert alert-{{ category }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
                 {% endwith %}
                 {% block content %}{% endblock %}
             </div>
+            {% if current_user.is_authenticated %}
             <div class="col-md-4">
+
                 <div class="content-section">
-                    <h3>Our Sidebar</h3>
-                    <p class='text-muted'>I'll fill this in later with something inteligent. 
+                    <h3>Need Help?</h3>
+                    <p class='lead'>You can find how to use our service.
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-light">Classrooms</li>
-                            <li class="list-group-item list-group-item-light">Times</li>
+                            <button type="button" class="lead list-group-item list-group-item-action"
+                                data-toggle="modal" data-target="#tutorialvideo">Tutorial Video</button>
+                            <button type="button" class="lead list-group-item list-group-item-action"
+                                data-toggle="modal" data-target="#userguide">User Guide</button>
                         </ul>
                     </p>
                 </div>
             </div>
+            {% endif %}
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script>
+        // it was previously for #roombooking modal, but due to duplicated name, changed its name to sharestatus
+        $('#sharestatus').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var roomNum = button.data('whatever1') // Extract info from data-* attributes
+            var roomid = button.data('whatever2')
+            var newurl = '/updateroom/' + roomid
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('#sharestatusLabel').text('Share Status of PSC ' + roomNum + ' with others')
+            modal.find('#set-available').attr('href', newurl + '/1')
+            modal.find('#set-not-available').attr('href', newurl + '/0')
+            // modal.find('.modal-body input').val(recipient)
+        })
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/Modal_Functions.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/Admin_Functions.js') }}"></script>
 </body>
+<div class="modal fade" id="tutorialvideo" tabindex="-1" role="dialog" aria-labelledby="tutorialvideo"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Tutorial Youtube Video -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="tutorialvideoLabel">Watch Tutorial Video</h5>
+            </div>
+            <div class="modal-body">
+                Tutorial Youtube Video Embed here
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="userguide" tabindex="-1" role="dialog" aria-labelledby="userguide" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- User Guide Section -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="userguideLabel">User Guide</h5>
+            </div>
+            <div class="modal-body">
+                User Guide Contents here
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </html>
