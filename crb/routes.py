@@ -253,3 +253,35 @@ def admin():
     else:
         return redirect(url_for('home'))
     return render_template('admin.html', title="Administrator", classRooms = classRooms, requests = requests, form=form, rule=rule)
+@app.route("/users", methods=['GET', 'POST'])
+@login_required
+def users():
+    if current_user.admin == True:
+        userList = User.query.all()
+    else:
+        return redirect(url_for('home'))
+    return render_template('users.html', title="User Management", users=userList)
+@app.route('/deleteuser/<int:id>')
+# related to roomstatus.html page: delete a classroom from db
+def delete_user(id):
+    user_to_delete = User.query.get_or_404(id)
+    try:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        return redirect(url_for('users'))
+    except:
+        return 'There was a problem deleting that user.'
+
+@app.route("/updateadmin/<int:id>/<int:admin>")
+# related to users.html page: apply change of a user's admin status
+def update_admin_status(id, admin):
+    user = User.query.get_or_404(id)
+    check = admin
+    print(check)
+    if check == 1:
+        user.admin = True
+        db.session.commit()
+    else:
+        user.admin = False
+        db.session.commit()
+    return redirect(url_for('users'))

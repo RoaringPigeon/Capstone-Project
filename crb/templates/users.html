@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content">
+    <h1 style="text-align: center">User Manager</h1>
+    {% if users|length < 1 %}
+    <h4 style="text-align: center">There are no users. Create one below.</h4>
+    {% else %}
+    <!-- Table showing Classroom # and its availability -->
+    <table class="table table-striped">
+        <tr>
+            <th>User #</th>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.admin }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="deleteUser({{user.id}})">Delete</button>
+                    <br>
+                    <a href="/updateadmin/{{user.id}}/1">Set to Admin</a>
+                    <br>
+                    <a href="/updateadmin/{{user.id}}/0">Remove Admin Status</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock content %}
