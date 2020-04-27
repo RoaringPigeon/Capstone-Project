@@ -1,6 +1,6 @@
 # Capstone-Project: ClassroomBooker
 The idea of this project is to create an web application that will allow MGSU students/faculties to freely share information regarding available classrooms for use in real-time basis, and further let them book any empty classrooms not in use for various activities such as group meetings, team projects, hanging out for fun, etc.
-Chekc out our deployed service at https://classroombooker.herokuapp.com/
+Check out our deployed service at https://classroombooker.herokuapp.com/
 
 # Setup
 This project is created in Python with Flask microframework, JS, and HTML/CSS. You will first need to install Python (v3.6 or newer), and then the following modules as well using pip:
